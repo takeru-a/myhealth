@@ -44,6 +44,11 @@ To use this application, you need to have an Oura Ring and obtain API credential
 
 5. Open your browser and navigate to `http://localhost:85101` to access the application.
 
+6. Demo
+https://myhealth-8jpwvvsqnt3cjr8op8fyem.streamlit.app/
+
 ## Usage
 
 Once the application is running, you can navigate through the different sections to view your health data. The data will be fetched from [the Oura Ring API](https://cloud.ouraring.com/v2/docs) and displayed in a user-friendly format.
+
+
