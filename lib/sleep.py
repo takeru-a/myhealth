@@ -60,10 +60,10 @@ def sleep_data_display(data, today, yesterday):
         today_data = yesterday_data
         
     # 表示睡眠データ項目
-    average_breath, average_heart_rate = st.columns(2)
-    bedtime_start, bedtime_end = st.columns(2)
     time_in_bed, total_sleep_duration, efficiency = st.columns(3)
     deep_sleep_duration, rem_sleep_duration, light_sleep_duration = st.columns(3)
+    bedtime_start, bedtime_end = st.columns(2)
+    average_breath, average_heart_rate = st.columns(2)
     awake_time, latency = st.columns(2)
     
     # 平均呼吸数
