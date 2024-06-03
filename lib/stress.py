@@ -5,7 +5,7 @@ import requests
 import lib.common as cn
 
 # ストレスデータを取得
-@st.cache_data(ttl=60 * 60 * 24)
+@st.cache_data(ttl=5 * 60)
 def get_stress_data(headers, params):
     stress_endpoint_url = 'https://api.ouraring.com/v2/usercollection/daily_stress'
     response = requests.get(stress_endpoint_url, headers=headers, params=params)
@@ -24,7 +24,7 @@ def display_stress_status(data):
         return '不明 :confused:'
 
 # ストレスデータの表示
-@st.cache_data(ttl=60 * 60 * 24)
+@st.cache_data(ttl=5 * 60)
 def stress_display(data, today, yesterday):
     stress_time, relax_time = st.columns(2)
     
@@ -33,15 +33,8 @@ def stress_display(data, today, yesterday):
     yesterday_data = data[data["day"] == yesterday]
     
     if today_data.empty:
-        today_data = yesterday_data
-
+        st.write('データがありません')
     # ストレス値の表示
-    if today_data.empty:
-        # 前日のストレス値
-        st_hours, st_minutes, st_seconds = cn.seconds_to_time(int(yesterday_data["stress_high"].iloc[0]))
-        re_hours, re_minutes, re_seconds = cn.seconds_to_time(int(yesterday_data["recovery_high"].iloc[0]))
-        stress_time.metric("StressFullTime", f"{st_hours}h {st_minutes}m {st_seconds}s")
-        relax_time.metric("RelaxTime", f"{re_hours}h {re_minutes}m {re_seconds}s")
     else:
         # 本日のストレス値
         st_hours, st_minutes, _ = cn.seconds_to_time(int(today_data["stress_high"].iloc[0]))

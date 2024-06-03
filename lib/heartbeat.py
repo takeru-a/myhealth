@@ -14,7 +14,7 @@ def get_heartbeat(headers, params):
     return heartbeat_data
 
 # 心拍数の表示
-@st.cache_data(ttl=60 * 60 * 24)
+@st.cache_data(ttl=5 * 60)
 def heartbeat_display(data):
      # 最大値、最小値、平均値
     max, min, avg = st.columns(3)
@@ -27,7 +27,7 @@ def heartbeat_display(data):
     avg.metric("Activity Average",  "{:.1f}".format(activate["bpm"].mean()) + "bpm")
 
 # 心拍数のchart表示
-@st.cache_data(ttl=60 * 60 * 24)
+@st.cache_data(ttl=5 * 60)
 def heartbeat_chart(data):   
     # altairによるチャートグラフ作成
     base_chart = alt.Chart(data).mark_line().encode(
